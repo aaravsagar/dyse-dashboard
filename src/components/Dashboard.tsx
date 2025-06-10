@@ -35,8 +35,8 @@ const Dashboard: React.FC = () => {
                 <Settings className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-white">Discord Dashboard</h1>
-                <p className="text-red-200 text-sm">Server Management</p>
+                <h1 className="text-xl font-bold text-white">DYSE Dashboard</h1>
+                <p className="text-red-200 text-sm">Per Server customization</p>
               </div>
             </div>
             

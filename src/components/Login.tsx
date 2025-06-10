@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAuth } from '../context/AuthContext';
-import { LogIn, Shield, Server, Settings } from 'lucide-react';
+import { LogIn, SquareCode, DollarSign, Banknote } from 'lucide-react';
 
 const Login: React.FC = () => {
   const { loading, error } = useAuth();
@@ -14,25 +14,29 @@ const Login: React.FC = () => {
       <div className="max-w-md w-full">
         <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-red-500/20 shadow-2xl">
           <div className="text-center mb-8">
-            <div className="bg-red-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Shield className="w-8 h-8 text-white" />
+            <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 overflow-hidden">
+              <img 
+                src="https://cdn.discordapp.com/app-icons/1322592306670338129/daab4e79fea4d0cb886b1fc92e8560e3.png?size=512" 
+                alt="DYSE Logo"
+                className="w-full h-full object-cover"
+              />
             </div>
-            <h1 className="text-3xl font-bold text-white mb-2">Discord Dashboard</h1>
-            <p className="text-red-200">Manage your Discord servers with ease</p>
+            <h1 className="text-3xl font-bold text-white mb-2">DYSE Dashboard</h1>
+            <p className="text-red-200">Configure DYSE Across Your Servers</p>
           </div>
 
           <div className="space-y-4 mb-8">
             <div className="flex items-center space-x-3 text-red-100">
-              <Server className="w-5 h-5 text-red-400" />
-              <span>Access your Discord servers</span>
+              <DollarSign className="w-5 h-5 text-red-400" />
+              <span>Change Prefix of Bot Per Server</span>
             </div>
             <div className="flex items-center space-x-3 text-red-100">
-              <Settings className="w-5 h-5 text-red-400" />
-              <span>Manage bot settings</span>
+              <Banknote className="w-5 h-5 text-red-400" />
+              <span>Change the Currency Symbol</span>
             </div>
             <div className="flex items-center space-x-3 text-red-100">
-              <Shield className="w-5 h-5 text-red-400" />
-              <span>Secure OAuth2 authentication</span>
+              <SquareCode className="w-5 h-5 text-red-400" />
+              <span>And Many More To Come Soon</span>
             </div>
           </div>
 
@@ -58,7 +62,24 @@ const Login: React.FC = () => {
           </button>
 
           <p className="text-red-300 text-xs text-center mt-4">
-            By logging in, you agree to our terms and privacy policy
+            By logging in, you agree to our{' '}
+            <a 
+              href="https://dyse.vercel.app/user-agreements/terms" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="underline hover:text-white transition-colors"
+            >
+              Terms and Conditions
+            </a>{' '}
+            and{' '}
+            <a 
+              href="https://dyse.vercel.app/user-agreements/privacy" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="underline hover:text-white transition-colors"
+            >
+              Privacy Policy
+            </a>
           </p>
         </div>
       </div>
