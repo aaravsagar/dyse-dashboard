@@ -1,13 +1,74 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Basic Meta Tags -->
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Discord Dashboard</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    
+    <!-- Primary Meta Tags -->
+    <title>Dyse Casino Bot Dashboard</title>
+    <meta name="description" content="Manage your Dyse casino bot with our dashboard - change prefix, set currency symbols, configure games, and track server economy. The ultimate Discord gambling bot control panel." />
+    <meta name="keywords" content="Dyse bot, Discord casino bot, change Dyse prefix, how to change Dyse bot prefix discord, Dyse dashboard, Discord gambling bot, change currency symbol Dyse, Dyse bot commands, Discord economy bot, configure Dyse bot" />
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Dyse Casino Bot Dashboard" />
+    <meta property="og:description" content="Configure your Dyse casino bot - change prefix, set currency, manage games, and track your Discord server's economy." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://dyse-dashboard.vercel.app" />
+    <meta property="og:image" content="https://cdn.discordapp.com/app-icons/1322592306670338129/daab4e79fea4d0cb886b1fc92e8560e3.png?size=512" />
+    <meta property="og:site_name" content="Dyse Casino Bot Dashboard" />
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Dyse Casino Bot Dashboard" />
+    <meta name="twitter:description" content="Manage Dyse bot across your servers - change prefix, currency, and configure all games in one place." />
+    <meta name="twitter:image" content="https://cdn.discordapp.com/app-icons/1322592306670338129/daab4e79fea4d0cb886b1fc92e8560e3.png?size=512" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpg" href="/public/dyse.jpg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/public/dyse.jpg">
+    <link rel="icon" type="image/jpg" sizes="32x32" href="/public/dyse.jpg">
+    <link rel="icon" type="image/jpg" sizes="16x16" href="/public/dyse.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://dyse-dashboard.vercel.app" />
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Dyse Casino Bot Dashboard",
+      "description": "Control panel for managing Dyse Discord gambling bot settings including prefix changes, currency configuration, and game management.",
+      "applicationCategory": "Discord Bot Dashboard",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "INR"
+      }
+    }
+    </script>
+    
+    <!-- Preload important resources -->
+    <link rel="preload" href="/src/main.tsx" as="script" />
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#5865F2" />
+    
+    <!-- iOS Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Noscript fallback -->
+    <noscript>
+      <h1>Dyse Casino Bot Dashboard</h1>
+      <p>Please enable JavaScript to use the Dyse bot dashboard.</p>
+    </noscript>
   </body>
 </html>
