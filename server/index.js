@@ -9,7 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: 'https://dyse-dashboard.vercel.app',
   credentials: true
 }));
 app.use(express.json());
@@ -80,7 +80,7 @@ app.get('/api/callback', async (req, res) => {
     const filteredGuilds = userGuilds.filter(guild => botGuildIds.has(guild.id));
 
     // Return success with user data and guilds
-    res.redirect(`http://localhost:5173/dashboard?token=${tokenData.access_token}&user=${encodeURIComponent(JSON.stringify(userData))}&guilds=${encodeURIComponent(JSON.stringify(filteredGuilds))}`);
+    res.redirect(`http://dyse-dashboard.vercel.app/dashboard?token=${tokenData.access_token}&user=${encodeURIComponent(JSON.stringify(userData))}&guilds=${encodeURIComponent(JSON.stringify(filteredGuilds))}`);
   } catch (error) {
     console.error('OAuth callback error:', error);
     res.status(500).json({ error: 'Authentication failed' });

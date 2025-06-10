@@ -6,7 +6,7 @@ const Login: React.FC = () => {
   const { loading, error } = useAuth();
 
   const handleLogin = () => {
-    window.location.href = 'http://localhost:3001/api/login';
+    window.location.href = 'http://dyse-dashboard.onrender.com/api/login';
   };
 
   return (
