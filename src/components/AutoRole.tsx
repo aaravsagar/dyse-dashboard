@@ -3,7 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { db } from '../config/firebase';
-import { ArrowLeft, Save, Settings, BarChart2, Users, Shield, ChevronDown } from 'lucide-react';
+import { ArrowLeft, Save, Settings, BarChart2, Users, Shield, ChevronDown, Home } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 interface Role {
@@ -43,7 +43,7 @@ const AutoRole: React.FC = () => {
       setLoading(true);
       setError(null);
 
-      // Load roles from Discord API
+      // Load roles from server API
       await loadRoles();
 
       // Load auto-role settings from Firebase
@@ -68,30 +68,18 @@ const AutoRole: React.FC = () => {
 
   const loadRoles = async () => {
     try {
-      const response = await fetch(`https://discord.com/api/v10/guilds/${guildId}/roles`, {
-        headers: {
-          'Authorization': `Bot ${process.env.DISCORD_BOT_TOKEN || 'YOUR_BOT_TOKEN'}`
-        }
-      });
+      const response = await fetch(`http://dyse-dashboard.onrender.com/api/guilds/${guildId}/roles`);
 
       if (response.ok) {
-        const rolesData = await response.json();
-        // Filter out @everyone role and sort by position
-        const filteredRoles = rolesData
-          .filter((role: any) => role.name !== '@everyone')
-          .sort((a: any, b: any) => b.position - a.position);
-        setRoles(filteredRoles);
+        const data = await response.json();
+        setRoles(data.roles);
       } else {
         throw new Error('Failed to fetch roles');
       }
     } catch (err) {
       console.error('Error fetching roles:', err);
-      // Fallback: create mock roles for demo
-      setRoles([
-        { id: '1', name: 'Member', color: 0, position: 1 },
-        { id: '2', name: 'VIP', color: 16776960, position: 2 },
-        { id: '3', name: 'Moderator', color: 65280, position: 3 }
-      ]);
+      setError('Failed to load server roles');
+      toast.error('Failed to load server roles');
     }
   };
 
@@ -143,7 +131,23 @@ const AutoRole: React.FC = () => {
     <div className="min-h-screen flex bg-gradient-to-br from-red-900 via-black to-red-900">
       {/* Sidebar */}
       <aside className="hidden md:block w-64 bg-black/30 border-r border-red-500/20 p-6 space-y-4">
-        <h2 className="text-white text-lg font-semibold mb-4">Navigation</h2>
+        <div className="flex items-center space-x-3 mb-6">
+          <div className="w-8 h-8 rounded-full flex items-center justify-center overflow-hidden">
+            <img 
+              src="https://cdn.discordapp.com/app-icons/1322592306670338129/daab4e79fea4d0cb886b1fc92e8560e3.png?size=512" 
+              alt="DYSE Logo"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <h2 className="text-white text-lg font-semibold">Navigation</h2>
+        </div>
+        <Link
+          to="/dashboard"
+          className="flex items-center space-x-3 text-red-200 hover:text-white hover:bg-red-500/20 px-4 py-2 rounded-lg transition"
+        >
+          <Home className="w-5 h-5" />
+          <span>Home</span>
+        </Link>
         <Link
           to={`/guild/${guildId}`}
           className="flex items-center space-x-3 text-red-200 hover:text-white hover:bg-red-500/20 px-4 py-2 rounded-lg transition"
@@ -187,8 +191,12 @@ const AutoRole: React.FC = () => {
                   <ArrowLeft className="w-5 h-5" />
                 </button>
                 <div className="flex items-center space-x-3">
-                  <div className="bg-red-600 w-10 h-10 rounded-full flex items-center justify-center">
-                    <Shield className="w-6 h-6 text-white" />
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden">
+                    <img 
+                      src="https://cdn.discordapp.com/app-icons/1322592306670338129/daab4e79fea4d0cb886b1fc92e8560e3.png?size=512" 
+                      alt="DYSE Logo"
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   <div>
                     <h1 className="text-xl font-bold text-white">Auto-Role</h1>

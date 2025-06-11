@@ -18,7 +18,7 @@ app.use(express.json());
 const DISCORD_API_BASE = 'https://discord.com/api/v10';
 
 app.get('/api/login', (req, res) => {
-  const discordAuthUrl = `https://discord.com/oauth2/authorize?client_id=${process.env.DISCORD_CLIENT_ID}&redirect_uri=${encodeURIComponent(process.env.DISCORD_REDIRECT_URI)}&response_type=code&scope=identify%20guilds`;
+  const discordAuthUrl = `https://discord.com/oauth2/authorize?client_id=1322592306670338129&permissions=564034902813776&response_type=code&redirect_uri=${encodeURIComponent('http://dyse-dashboard.onrender.com/api/callback')}&integration_type=0&scope=identify+guilds+guilds.members.read+bot+email+applications.commands`;
   res.redirect(discordAuthUrl);
 });
 
@@ -37,11 +37,11 @@ app.get('/api/callback', async (req, res) => {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: new URLSearchParams({
-        client_id: process.env.DISCORD_CLIENT_ID,
+        client_id: '1322592306670338129',
         client_secret: process.env.DISCORD_CLIENT_SECRET,
         grant_type: 'authorization_code',
         code: code,
-        redirect_uri: process.env.DISCORD_REDIRECT_URI,
+        redirect_uri: 'http://dyse-dashboard.onrender.com/api/callback',
       }),
     });
 
@@ -80,7 +80,7 @@ app.get('/api/callback', async (req, res) => {
     const filteredGuilds = userGuilds.filter(guild => botGuildIds.has(guild.id));
 
     // Return success with user data and guilds
-    res.redirect(`http://dyse-dashboard.vercel.app/dashboard?token=${tokenData.access_token}&user=${encodeURIComponent(JSON.stringify(userData))}&guilds=${encodeURIComponent(JSON.stringify(filteredGuilds))}`);
+    res.redirect(`https://dyse-dashboard.vercel.app/dashboard?token=${tokenData.access_token}&user=${encodeURIComponent(JSON.stringify(userData))}&guilds=${encodeURIComponent(JSON.stringify(filteredGuilds))}`);
   } catch (error) {
     console.error('OAuth callback error:', error);
     res.status(500).json({ error: 'Authentication failed' });
@@ -115,6 +115,34 @@ app.get('/api/guilds/:token', async (req, res) => {
   } catch (error) {
     console.error('Guilds fetch error:', error);
     res.status(500).json({ error: 'Failed to fetch guilds' });
+  }
+});
+
+// New endpoint to fetch guild roles
+app.get('/api/guilds/:guildId/roles', async (req, res) => {
+  const { guildId } = req.params;
+
+  try {
+    const response = await fetch(`${DISCORD_API_BASE}/guilds/${guildId}/roles`, {
+      headers: {
+        'Authorization': `Bot ${process.env.DISCORD_BOT_TOKEN}`
+      }
+    });
+
+    if (response.ok) {
+      const rolesData = await response.json();
+      // Filter out @everyone role and sort by position
+      const filteredRoles = rolesData
+        .filter((role) => role.name !== '@everyone')
+        .sort((a, b) => b.position - a.position);
+      
+      res.json({ roles: filteredRoles });
+    } else {
+      throw new Error('Failed to fetch roles');
+    }
+  } catch (error) {
+    console.error('Roles fetch error:', error);
+    res.status(500).json({ error: 'Failed to fetch roles' });
   }
 });
 
