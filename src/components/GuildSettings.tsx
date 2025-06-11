@@ -3,7 +3,7 @@ import { useParams, useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { db } from '../config/firebase';
-import { ArrowLeft, Save, Settings, Hash, Info, BarChart2 } from 'lucide-react';
+import { ArrowLeft, Save, Settings, Hash, Info, BarChart2, Shield, Users } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const GuildSettings: React.FC = () => {
@@ -113,11 +113,25 @@ const GuildSettings: React.FC = () => {
       <aside className="hidden md:block w-64 bg-black/30 border-r border-red-500/20 p-6 space-y-4">
         <h2 className="text-white text-lg font-semibold mb-4">Navigation</h2>
         <Link
-          to={`/dashboard/${guildId}`}
-          className="flex items-center space-x-3 text-red-200 hover:text-white hover:bg-red-500/20 px-4 py-2 rounded-lg transition"
+          to={`/guild/${guildId}`}
+          className="flex items-center space-x-3 text-white bg-red-500/30 px-4 py-2 rounded-lg"
         >
           <Settings className="w-5 h-5" />
           <span>Settings</span>
+        </Link>
+        <Link
+          to={`/guild/${guildId}/auto-role`}
+          className="flex items-center space-x-3 text-red-200 hover:text-white hover:bg-red-500/20 px-4 py-2 rounded-lg transition"
+        >
+          <Shield className="w-5 h-5" />
+          <span>Auto-Role</span>
+        </Link>
+        <Link
+          to={`/guild/${guildId}/income-shop`}
+          className="flex items-center space-x-3 text-red-200 hover:text-white hover:bg-red-500/20 px-4 py-2 rounded-lg transition"
+        >
+          <Users className="w-5 h-5" />
+          <span>Income Shop</span>
         </Link>
         <Link
           to={`/dashboard/${guildId}/leaderboard`}
