@@ -68,7 +68,7 @@ const AutoRole: React.FC = () => {
 
   const loadRoles = async () => {
     try {
-      const response = await fetch(`http://dyse-dashboard.onrender.com/api/guilds/${guildId}/roles`);
+      const response = await fetch(`https://dyse-dashboard.onrender.com/api/guilds/${guildId}/roles`);
 
       if (response.ok) {
         const data = await response.json();

@@ -18,7 +18,7 @@ app.use(express.json());
 const DISCORD_API_BASE = 'https://discord.com/api/v10';
 
 app.get('/api/login', (req, res) => {
-  const discordAuthUrl = `https://discord.com/oauth2/authorize?client_id=1322592306670338129&permissions=564034902813776&response_type=code&redirect_uri=${encodeURIComponent('http://dyse-dashboard.onrender.com/api/callback')}&integration_type=0&scope=identify+guilds+guilds.members.read+bot+email+applications.commands`;
+  const discordAuthUrl = `https://discord.com/oauth2/authorize?client_id=1322592306670338129&permissions=564034902813776&response_type=code&redirect_uri=${encodeURIComponent('https://dyse-dashboard.onrender.com/api/callback')}&integration_type=0&scope=identify+guilds+guilds.members.read+bot+email+applications.commands`;
   res.redirect(discordAuthUrl);
 });
 
@@ -41,7 +41,7 @@ app.get('/api/callback', async (req, res) => {
         client_secret: process.env.DISCORD_CLIENT_SECRET,
         grant_type: 'authorization_code',
         code: code,
-        redirect_uri: 'http://dyse-dashboard.onrender.com/api/callback',
+        redirect_uri: 'https://dyse-dashboard.onrender.com/api/callback',
       }),
     });
 
