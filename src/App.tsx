@@ -5,6 +5,8 @@ import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Dashboard from './components/Dashboard';
 import GuildSettings from './components/GuildSettings';
+import AutoRole from './components/AutoRole';
+import IncomeShop from './components/IncomeShop';
 import Leaderboard from './components/Leaderboard';
 
 function App() {
@@ -35,8 +37,28 @@ function App() {
               }
             />
 
+            {/* Auto-Role Settings */}
+            <Route
+              path="/guild/:guildId/auto-role"
+              element={
+                <ProtectedRoute>
+                  <AutoRole />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* Income Shop Settings */}
+            <Route
+              path="/guild/:guildId/income-shop"
+              element={
+                <ProtectedRoute>
+                  <IncomeShop />
+                </ProtectedRoute>
+              }
+            />
+
             {/* Guild-specific Leaderboard */}
-       <Route
+            <Route
               path="/dashboard/:guildId/leaderboard"
               element={
                 <ProtectedRoute>
@@ -45,7 +67,6 @@ function App() {
               }
             />
           </Routes>
-
 
           <Toaster
             position="top-right"

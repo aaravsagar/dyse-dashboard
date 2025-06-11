@@ -3,7 +3,7 @@ import { useParams, useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { db } from '../config/firebase';
-import { ArrowLeft, Save, Settings, Hash, Info, BarChart2 } from 'lucide-react';
+import { ArrowLeft, Save, Settings, Hash, Info, BarChart2, Shield, Users, Home } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const GuildSettings: React.FC = () => {
@@ -111,13 +111,43 @@ const GuildSettings: React.FC = () => {
     <div className="min-h-screen flex bg-gradient-to-br from-red-900 via-black to-red-900">
       {/* Sidebar */}
       <aside className="hidden md:block w-64 bg-black/30 border-r border-red-500/20 p-6 space-y-4">
-        <h2 className="text-white text-lg font-semibold mb-4">Navigation</h2>
+        <div className="flex items-center space-x-3 mb-6">
+          <div className="w-8 h-8 rounded-full flex items-center justify-center overflow-hidden">
+            <img 
+              src="https://cdn.discordapp.com/app-icons/1322592306670338129/daab4e79fea4d0cb886b1fc92e8560e3.png?size=512" 
+              alt="DYSE Logo"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <h2 className="text-white text-lg font-semibold">Navigation</h2>
+        </div>
         <Link
-          to={`/dashboard/${guildId}`}
+          to="/dashboard"
           className="flex items-center space-x-3 text-red-200 hover:text-white hover:bg-red-500/20 px-4 py-2 rounded-lg transition"
+        >
+          <Home className="w-5 h-5" />
+          <span>Home</span>
+        </Link>
+        <Link
+          to={`/guild/${guildId}`}
+          className="flex items-center space-x-3 text-white bg-red-500/30 px-4 py-2 rounded-lg"
         >
           <Settings className="w-5 h-5" />
           <span>Settings</span>
+        </Link>
+        <Link
+          to={`/guild/${guildId}/auto-role`}
+          className="flex items-center space-x-3 text-red-200 hover:text-white hover:bg-red-500/20 px-4 py-2 rounded-lg transition"
+        >
+          <Shield className="w-5 h-5" />
+          <span>Auto-Role</span>
+        </Link>
+        <Link
+          to={`/guild/${guildId}/income-shop`}
+          className="flex items-center space-x-3 text-red-200 hover:text-white hover:bg-red-500/20 px-4 py-2 rounded-lg transition"
+        >
+          <Users className="w-5 h-5" />
+          <span>Income Shop</span>
         </Link>
         <Link
           to={`/dashboard/${guildId}/leaderboard`}
@@ -135,14 +165,18 @@ const GuildSettings: React.FC = () => {
             <div className="flex items-center justify-between py-4">
               <div className="flex items-center space-x-4">
                 <button
-                  onClick={() => navigate('/')}
+                  onClick={() => navigate('/dashboard')}
                   className="bg-red-600/20 hover:bg-red-600/30 text-red-200 hover:text-white p-2 rounded-lg transition-all duration-200"
                 >
                   <ArrowLeft className="w-5 h-5" />
                 </button>
                 <div className="flex items-center space-x-3">
-                  <div className="bg-red-600 w-10 h-10 rounded-full flex items-center justify-center">
-                    <Settings className="w-6 h-6 text-white" />
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden">
+                    <img 
+                      src="https://cdn.discordapp.com/app-icons/1322592306670338129/daab4e79fea4d0cb886b1fc92e8560e3.png?size=512" 
+                      alt="DYSE Logo"
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   <div>
                     <h1 className="text-xl font-bold text-white">{guildName}</h1>

@@ -15,11 +15,12 @@ export interface DiscordGuild {
   features: string[];
 }
 
-export interface AuthContext {
+export interface AuthContextType {
   user: DiscordUser | null;
-  token: string | null;
   guilds: DiscordGuild[];
-  loading: boolean;
-  login: () => void;
+  accessToken: string | null;
+  login: (code: string) => Promise<void>;
   logout: () => void;
+  loading: boolean;
+  error: string | null;
 }

@@ -7,7 +7,7 @@ import {
   getDoc
 } from 'firebase/firestore';
 import { db } from '../config/firebase';
-import { ArrowUpRight, ArrowDownRight, Settings, BarChart2 } from 'lucide-react';
+import { ArrowUpRight, ArrowDownRight, Settings, BarChart2, Home } from 'lucide-react';
 
 interface UserData {
   id: string;
@@ -80,7 +80,23 @@ const Leaderboard: React.FC = () => {
     <div className="min-h-screen flex bg-gradient-to-br from-red-900 via-black to-red-900">
       {/* Sidebar */}
       <aside className="hidden md:block w-64 bg-black/30 border-r border-red-500/20 p-6 space-y-4">
-        <h2 className="text-white text-lg font-semibold mb-4">Navigation</h2>
+        <div className="flex items-center space-x-3 mb-6">
+          <div className="w-8 h-8 rounded-full flex items-center justify-center overflow-hidden">
+            <img 
+              src="https://cdn.discordapp.com/app-icons/1322592306670338129/daab4e79fea4d0cb886b1fc92e8560e3.png?size=512" 
+              alt="DYSE Logo"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <h2 className="text-white text-lg font-semibold">Navigation</h2>
+        </div>
+        <Link
+          to="/dashboard"
+          className="flex items-center space-x-3 text-red-200 hover:text-white hover:bg-red-500/20 px-4 py-2 rounded-lg transition"
+        >
+          <Home className="w-5 h-5" />
+          <span>Home</span>
+        </Link>
         <Link
           to={`/guild/${guildId}`}
           className="flex items-center space-x-3 text-red-200 hover:text-white hover:bg-red-500/20 px-4 py-2 rounded-lg transition"
@@ -90,7 +106,7 @@ const Leaderboard: React.FC = () => {
         </Link>
         <Link
           to={`/dashboard/${guildId}/leaderboard`}
-          className="flex items-center space-x-3 text-red-200 hover:text-white hover:bg-red-500/20 px-4 py-2 rounded-lg transition"
+          className="flex items-center space-x-3 text-white bg-red-500/30 px-4 py-2 rounded-lg"
         >
           <BarChart2 className="w-5 h-5" />
           <span>Leaderboard</span>
@@ -102,7 +118,16 @@ const Leaderboard: React.FC = () => {
         <header className="bg-black/50 backdrop-blur-lg border-b border-red-500/20">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between py-4">
-              <h1 className="text-3xl font-bold text-white">🏆 Leaderboard</h1>
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden">
+                  <img 
+                    src="https://cdn.discordapp.com/app-icons/1322592306670338129/daab4e79fea4d0cb886b1fc92e8560e3.png?size=512" 
+                    alt="DYSE Logo"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <h1 className="text-3xl font-bold text-white">🏆 Leaderboard</h1>
+              </div>
             </div>
           </div>
         </header>

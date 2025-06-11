@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { LogOut, Settings, Users, Crown, ExternalLink } from 'lucide-react';
+import { LogOut, Settings, Users, Crown, ExternalLink, Home } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const Dashboard: React.FC = () => {
@@ -31,8 +31,12 @@ const Dashboard: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-4">
-              <div className="bg-red-600 w-10 h-10 rounded-full flex items-center justify-center">
-                <Settings className="w-6 h-6 text-white" />
+              <div className="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden">
+                <img 
+                  src="https://cdn.discordapp.com/app-icons/1322592306670338129/daab4e79fea4d0cb886b1fc92e8560e3.png?size=512" 
+                  alt="DYSE Logo"
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div>
                 <h1 className="text-xl font-bold text-white">DYSE Dashboard</h1>
@@ -41,6 +45,14 @@ const Dashboard: React.FC = () => {
             </div>
             
             <div className="flex items-center space-x-4">
+              <button
+                onClick={() => navigate('/dashboard')}
+                className="bg-red-600/20 hover:bg-red-600/30 text-red-200 hover:text-white px-3 py-2 rounded-lg transition-all duration-200 flex items-center space-x-2"
+              >
+                <Home className="w-4 h-4" />
+                <span>Home</span>
+              </button>
+              
               <div className="flex items-center space-x-3">
                 {user?.avatar ? (
                   <img
@@ -87,7 +99,7 @@ const Dashboard: React.FC = () => {
               The bot is not installed in any of your servers yet.
             </p>
             <a
-              href="https://discord.com/oauth2/authorize?client_id=1322592306670338129&permissions=563794183317585&scope=bot"
+              href="https://discord.com/oauth2/authorize?client_id=1322592306670338129&permissions=564034902813776&response_type=code&redirect_uri=http%3A%2F%2Fdyse-dashboard.onrender.com%2Fapi%2Fcallback&integration_type=0&scope=identify+guilds+guilds.members.read+bot+email+applications.commands"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center space-x-2 bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg transition-all duration-200 transform hover:scale-105"
