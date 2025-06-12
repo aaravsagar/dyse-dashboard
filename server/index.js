@@ -18,7 +18,7 @@ app.use(express.json());
 const DISCORD_API_BASE = 'https://discord.com/api/v10';
 
 app.get('/api/login', (req, res) => {
-  const discordAuthUrl = `https://discord.com/oauth2/authorize?client_id=1322592306670338129&permissions=564034902813776&response_type=code&redirect_uri=${encodeURIComponent('https://dyse-dashboard.onrender.com/api/callback')}&integration_type=0&scope=identify+guilds+guilds.members.read+bot+email+applications.commands`;
+  const discordAuthUrl = `https://discord.com/oauth2/authorize?client_id=1322592306670338129&permissions=552172121201&response_type=code&redirect_uri=${encodeURIComponent('https://dyse-dashboard.onrender.com/api/callback')}&integration_type=0&scope=identify+guilds+guilds.members.read+bot+guilds.channels.read+applications.commands`;
   res.redirect(discordAuthUrl);
 });
 
@@ -118,31 +118,40 @@ app.get('/api/guilds/:token', async (req, res) => {
   }
 });
 
-// New endpoint to fetch guild roles
-app.get('/api/guilds/:guildId/roles', async (req, res) => {
-  const { guildId } = req.params;
-
+// Updated role fetching route using Discord.js client approach
+app.get("/api/guilds/:guildId/roles", async (req, res) => {
   try {
+    const { guildId } = req.params;
+    
+    // Fetch roles using Discord API directly
     const response = await fetch(`${DISCORD_API_BASE}/guilds/${guildId}/roles`, {
       headers: {
         'Authorization': `Bot ${process.env.DISCORD_BOT_TOKEN}`
       }
     });
 
-    if (response.ok) {
-      const rolesData = await response.json();
-      // Filter out @everyone role and sort by position
-      const filteredRoles = rolesData
-        .filter((role) => role.name !== '@everyone')
-        .sort((a, b) => b.position - a.position);
-      
-      res.json({ roles: filteredRoles });
-    } else {
-      throw new Error('Failed to fetch roles');
+    if (!response.ok) {
+      console.error(`Failed to fetch roles for guild ${guildId}: ${response.status} ${response.statusText}`);
+      return res.status(response.status).json({ error: "Failed to fetch guild roles" });
     }
-  } catch (error) {
-    console.error('Roles fetch error:', error);
-    res.status(500).json({ error: 'Failed to fetch roles' });
+
+    const rolesData = await response.json();
+    
+    // Filter out @everyone role and sort by position
+    const roles = rolesData
+      .filter((role) => role.name !== '@everyone')
+      .map(role => ({
+        id: role.id,
+        name: role.name,
+        color: role.color,
+        position: role.position,
+      }))
+      .sort((a, b) => b.position - a.position);
+
+    return res.json({ roles });
+  } catch (err) {
+    console.error("Roles fetch error:", err);
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 });
 

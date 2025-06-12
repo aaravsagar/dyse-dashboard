@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { db } from '../config/firebase';
+<<<<<<< HEAD
 import { ArrowLeft, Save, Settings, BarChart2, Users, Shield, ChevronDown, Home } from 'lucide-react';
+=======
+import { Save, Shield, ChevronDown, CheckSquare, Square } from 'lucide-react';
+>>>>>>> ce2c6cc083d71c8f63474c882189ab8d394c7881
 import toast from 'react-hot-toast';
+import Layout from './Layout';
 
 interface Role {
   id: string;
@@ -20,7 +25,6 @@ interface AutoRoleSettings {
 
 const AutoRole: React.FC = () => {
   const { guildId } = useParams<{ guildId: string }>();
-  const navigate = useNavigate();
   const { user, accessToken } = useAuth();
 
   const [roles, setRoles] = useState<Role[]>([]);
@@ -118,16 +122,21 @@ const AutoRole: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-red-900 via-black to-red-900 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-4 border-red-500 border-t-transparent mx-auto mb-4"></div>
-          <p className="text-white text-lg">Loading auto-role settings...</p>
+      <Layout guildId={guildId} title="Auto-Role" subtitle="Automatically assign roles to new members">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="flex items-center justify-center py-12">
+            <div className="text-center">
+              <div className="animate-spin rounded-full h-16 w-16 border-4 border-red-500 border-t-transparent mx-auto mb-4"></div>
+              <p className="text-white text-lg">Loading auto-role settings...</p>
+            </div>
+          </div>
         </div>
-      </div>
+      </Layout>
     );
   }
 
   return (
+<<<<<<< HEAD
     <div className="min-h-screen flex bg-gradient-to-br from-red-900 via-black to-red-900">
       {/* Sidebar */}
       <aside className="hidden md:block w-64 bg-black/30 border-r border-red-500/20 p-6 space-y-4">
@@ -205,9 +214,32 @@ const AutoRole: React.FC = () => {
                 </div>
               </div>
             </div>
-          </div>
-        </header>
+=======
+    <Layout guildId={guildId} title="Auto-Role" subtitle="Automatically assign roles to new members">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="bg-gray-900 border border-red-500/30 rounded-2xl p-8">
+          <h2 className="text-2xl font-bold text-white mb-2">Auto-Role Configuration</h2>
+          <p className="text-red-300 mb-6">Set up automatic role assignment for new server members</p>
 
+          {error && (
+            <div className="bg-red-500/20 border border-red-500/50 rounded-lg p-4 mb-6">
+              <p className="text-red-200">{error}</p>
+            </div>
+          )}
+
+          {/* Toggle */}
+          <div className="bg-black/50 border border-red-500/20 rounded-xl p-6 flex justify-between items-center mb-6">
+            <div>
+              <h3 className="text-lg font-semibold text-white mb-1">Enable Auto-Role</h3>
+              <p className="text-red-300 text-sm">Automatically assign selected roles to new members</p>
+            </div>
+            <button onClick={handleToggleEnabled} className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${autoRoleSettings.enabled ? 'bg-red-600' : 'bg-gray-600'}`}>
+              <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${autoRoleSettings.enabled ? 'translate-x-6' : 'translate-x-1'}`} />
+            </button>
+>>>>>>> ce2c6cc083d71c8f63474c882189ab8d394c7881
+          </div>
+
+<<<<<<< HEAD
         <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-red-500/20">
             <div className="mb-8">
@@ -218,9 +250,18 @@ const AutoRole: React.FC = () => {
             {error && (
               <div className="bg-red-500/20 border border-red-500/50 rounded-lg p-4 mb-6">
                 <p className="text-red-200">{error}</p>
+=======
+          {/* Role Multi-Selection */}
+          {autoRoleSettings.enabled && (
+            <div className="bg-black/50 border border-red-500/20 rounded-xl p-6">
+              <div className="flex items-center space-x-3 mb-4">
+                <Shield className="w-6 h-6 text-red-400" />
+                <h3 className="text-lg font-semibold text-white">Select Roles</h3>
+>>>>>>> ce2c6cc083d71c8f63474c882189ab8d394c7881
               </div>
-            )}
+              <p className="text-red-300 text-sm mb-4">Choose roles to assign to new members</p>
 
+<<<<<<< HEAD
             <div className="space-y-6">
               {/* Enable/Disable Toggle */}
               <div className="bg-black/30 rounded-xl p-6 border border-red-500/10">
@@ -318,9 +359,29 @@ const AutoRole: React.FC = () => {
                   <p>• The bot's role must be higher than the role you want to assign</p>
                   <p>• This feature only works for new members joining after it's enabled</p>
                 </div>
+=======
+              <div className="space-y-2 max-h-60 overflow-y-auto">
+                {roles.map(role => (
+                  <button
+                    key={role.id}
+                    onClick={() => toggleRole(role.id)}
+                    className="flex items-center space-x-3 w-full text-left px-3 py-2 rounded-lg hover:bg-red-500/20 transition"
+                  >
+                    {autoRoleSettings.roleIds.includes(role.id) ? (
+                      <CheckSquare className="text-red-400 w-5 h-5" />
+                    ) : (
+                      <Square className="text-red-400 w-5 h-5" />
+                    )}
+                    <div className="w-3 h-3 rounded-full" style={{ backgroundColor: getRoleColor(role.color) }} />
+                    <span className="text-white">{role.name}</span>
+                  </button>
+                ))}
+>>>>>>> ce2c6cc083d71c8f63474c882189ab8d394c7881
               </div>
             </div>
+          )}
 
+<<<<<<< HEAD
             {/* Save Button */}
             <div className="flex justify-end mt-8">
               <button
@@ -336,10 +397,26 @@ const AutoRole: React.FC = () => {
                 <span>{saving ? 'Saving...' : 'Save Settings'}</span>
               </button>
             </div>
+=======
+          {/* Save */}
+          <div className="flex justify-end mt-8">
+            <button
+              onClick={handleSaveSettings}
+              disabled={saving}
+              className="bg-red-600 hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3 px-8 rounded-lg transition-all duration-200 transform hover:scale-105 flex items-center space-x-2"
+            >
+              {saving ? (
+                <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
+              ) : (
+                <Save className="w-5 h-5" />
+              )}
+              <span>{saving ? 'Saving...' : 'Save Settings'}</span>
+            </button>
+>>>>>>> ce2c6cc083d71c8f63474c882189ab8d394c7881
           </div>
-        </main>
+        </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 
