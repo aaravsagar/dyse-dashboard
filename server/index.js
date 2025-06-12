@@ -18,7 +18,7 @@ app.use(express.json());
 const DISCORD_API_BASE = 'https://discord.com/api/v10';
 
 app.get('/api/login', (req, res) => {
-  const discordAuthUrl = `https://discord.com/oauth2/authorize?client_id=1322592306670338129&permissions=552172121201&response_type=code&redirect_uri=${encodeURIComponent('https://dyse-dashboard.onrender.com/api/callback')}&integration_type=0&scope=identify+guilds+guilds.members.read+bot+guilds.channels.read+applications.commands`;
+  const discordAuthUrl = `https://discord.com/oauth2/authorize?client_id=1322592306670338129&permissions=8&response_type=code&redirect_uri=${encodeURIComponent('https://dyse-dashboard.onrender.com/api/callback')}&integration_type=0&scope=identify+guilds+email+guilds.members.read+bot`;
   res.redirect(discordAuthUrl);
 });
 
