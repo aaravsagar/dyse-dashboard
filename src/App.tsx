@@ -8,6 +8,7 @@ import GuildSettings from './components/GuildSettings';
 import AutoRole from './components/AutoRole';
 import IncomeShop from './components/IncomeShop';
 import Leaderboard from './components/Leaderboard';
+import BotAdmin from './components/BotAdmin';
 
 function App() {
   return (
@@ -66,6 +67,16 @@ function App() {
                 </ProtectedRoute>
               }
             />
+
+            {/* Bot Admin */}
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoute>
+                  <BotAdmin />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
 
           <Toaster
@@ -73,9 +84,9 @@ function App() {
             toastOptions={{
               duration: 4000,
               style: {
-                background: 'rgba(0, 0, 0, 0.8)',
+                background: 'rgba(0, 0, 0, 0.9)',
                 color: '#fff',
-                border: '1px solid rgba(239, 68, 68, 0.3)',
+                border: '1px solid rgba(239, 68, 68, 0.5)',
                 backdropFilter: 'blur(10px)',
               },
               success: {

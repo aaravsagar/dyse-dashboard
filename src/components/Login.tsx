@@ -10,9 +10,9 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-900 via-black to-red-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-black flex items-center justify-center p-4">
       <div className="max-w-md w-full">
-        <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-red-500/20 shadow-2xl">
+        <div className="bg-gray-900 border border-red-500/30 rounded-2xl p-8 shadow-2xl">
           <div className="text-center mb-8">
             <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 overflow-hidden">
               <img 
@@ -22,7 +22,7 @@ const Login: React.FC = () => {
               />
             </div>
             <h1 className="text-3xl font-bold text-white mb-2">DYSE Dashboard</h1>
-            <p className="text-red-200">Configure DYSE Across Your Servers</p>
+            <p className="text-red-300">Configure DYSE Across Your Servers</p>
           </div>
 
           <div className="space-y-4 mb-8">
@@ -49,7 +49,7 @@ const Login: React.FC = () => {
           <button
             onClick={handleLogin}
             disabled={loading}
-            className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+            className="w-full bg-red-600 hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 flex items-center justify-center space-x-2"
           >
             {loading ? (
               <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
