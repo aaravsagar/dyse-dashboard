@@ -37,7 +37,7 @@ const Dashboard: React.FC = () => {
               The bot is not installed in any of your servers yet.
             </p>
             <a
-              href="https://discord.com/oauth2/authorize?client_id=1322592306670338129&permissions=564034902813776&response_type=code&redirect_uri=http%3A%2F%2Fdyse-dashboard.onrender.com%2Fapi%2Fcallback&integration_type=0&scope=identify+guilds+guilds.members.read+bot+email+applications.commands"
+              href="https://discord.com/oauth2/authorize?client_id=1322592306670338129&permissions=552172121201&response_type=code&redirect_uri=https%3A%2F%2Fdyse-dashboard.onrender.com%2Fapi%2Fcallback&integration_type=0&scope=identify+guilds+guilds.members.read+bot+guilds.channels.read+applications.commands"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center space-x-2 bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg transition-all duration-200 transform hover:scale-105"
